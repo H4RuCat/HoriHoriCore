@@ -1,0 +1,4 @@
+name: Horihoricore
+version: '${project.version}'
+main: horihoricore.horihoricore.Horihoricore
+api-version: 1.17
