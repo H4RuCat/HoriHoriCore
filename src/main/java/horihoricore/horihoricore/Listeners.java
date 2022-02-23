@@ -7,7 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import sun.jvm.hotspot.opto.Block;
 
 import java.util.HashMap;
 
@@ -39,14 +41,12 @@ public class Listeners implements Listener {
             e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えました！");
         }
 
-
     }
     @EventHandler
-    public boolean onJoin(PlayerJoinEvent e) {
+    public void onJoin(PlayerJoinEvent e) {
         if (e.getPlayer().getWorld().getName().equals("Horihori")){
             if (e.getPlayer().hasPlayedBefore())
                 e.getPlayer().sendMessage(ChatColor.MAGIC.AQUA + "ll" + ChatColor.YELLOW.BOLD + "初回ログイン得点を配布しました！" + ChatColor.MAGIC.AQUA + "ll");
         }
-        return false;
     }
 }
