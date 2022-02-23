@@ -2,6 +2,7 @@ package horihoricore.horihoricore;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,7 +37,6 @@ public class Listeners implements Listener {
         if (map.containsKey(e.getPlayer()) == map.containsValue(100))
         {
             e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えました！");
-            e.getPlayer().playSound();
         }
 
 
