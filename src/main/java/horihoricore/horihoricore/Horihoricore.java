@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public final class Horihoricore extends JavaPlugin implements Listener{
+public final class Horihoricore extends JavaPlugin implements Listener {
 
     public static String Prefix = "[HoriCore] ";
     private Listeners listeners;
@@ -31,6 +31,7 @@ public final class Horihoricore extends JavaPlugin implements Listener{
         Bukkit.getPluginManager().registerEvents(this, this);
 
     }
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         map.put(e.getPlayer(), 0);
@@ -44,18 +45,7 @@ public final class Horihoricore extends JavaPlugin implements Listener{
 
 
     @Override
-    public void onDisable() {getLogger().info("掘り掘りぱーぼーを終了します"); }
-
-    private static final ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE, 1);
-    static {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        assert itemMeta != null;
-        itemMeta.setDisplayName("初期ピッケル");
-        List<String> Lores = new ArrayList<>();
-        Lores.add("初期に配布されるピッケルです");
-        itemMeta.setLore(Lores);
-        itemStack.setItemMeta(itemMeta);
+    public void onDisable() {
+        getLogger().info("掘り掘りぱーぼーを終了します");
     }
-
-
 }
