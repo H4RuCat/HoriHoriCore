@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public final class Horihoricore extends JavaPlugin implements Listener {
 
-    public static String Prefix = ChatColor.GRAY + "[" + ChatColor.WHITE + "HoriCore" + ChatColor.GRAY + "] " + ChatColor.WHITE ;
+    public static String Prefix = ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "HoriCore" + ChatColor.DARK_GRAY + "] " + ChatColor.WHITE ;
     private Listeners listeners;
 
     public HashMap<Player, Integer> map = new HashMap<>();
@@ -26,8 +26,8 @@ public final class Horihoricore extends JavaPlugin implements Listener {
 
     }
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {map.put(e.getPlayer(), 0);}
-
+    public void onJoin(PlayerJoinEvent e) {
+        if (!map.containsKey(map)) map.put(e.getPlayer(), 0);}
 
     @Override
     public void onDisable() {
