@@ -24,8 +24,7 @@ public final class Horihoricore extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-        getLogger().info("掘り掘りCoreの起動を開始します...");
+        getLogger().info("HoriHoriCoreぱーぼーの起動を開始します...");
         this.listeners = new Listeners(map);
         Bukkit.getPluginManager().registerEvents(this.listeners, this);
         Bukkit.getPluginManager().registerEvents(this, this);
@@ -46,6 +45,6 @@ public final class Horihoricore extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        getLogger().info("掘り掘りぱーぼーを終了します");
+        getLogger().info("HoriHoriCoreぱーぼーを終了します...");
     }
 }
