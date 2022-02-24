@@ -66,7 +66,6 @@ public class Listeners implements Listener {
             Inventory inv = e.getPlayer().getInventory(); // ここからアイテム //
             if (inv.contains(Material.WOODEN_PICKAXE)) ;
             else inv.addItem(new ItemStack(Material.WOODEN_PICKAXE, 1));
-            e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "こんにちは！" + ChatColor.AQUA + pName + ChatColor.YELLOW + "さん！貴方の現在の採掘量は" + ChatColor.RED + map.get(e.getPlayer()) + ChatColor.YELLOW + "です！");
         }
     }
     // Event追加するならここから //

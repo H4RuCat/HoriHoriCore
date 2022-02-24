@@ -27,7 +27,14 @@ public final class Horihoricore extends JavaPlugin implements Listener {
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        if (!map.containsKey(map)) map.put(e.getPlayer(), 0);}
+
+        String pName = e.getPlayer().getName();
+
+        if (!map.containsKey(e.getPlayer()))
+            map.put(e.getPlayer(), 0);
+            e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "こんにちは！" + ChatColor.AQUA + pName + ChatColor.YELLOW + "さん！貴方の現在の採掘量は" + ChatColor.RED + map.get(e.getPlayer()) + ChatColor.YELLOW + "です！");
+    }
+
 
     @Override
     public void onDisable() {
