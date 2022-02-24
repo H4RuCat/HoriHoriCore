@@ -56,6 +56,7 @@ public class Listeners implements Listener {
             List<String> lores = new ArrayList<String>();
             lores.add(ChatColor.YELLOW + "一番最初に貰うことが出来るピッケル");
             lores.add(ChatColor.YELLOW + "性能はイマイチだが..." + ChatColor.RED + "伸びしろ" + ChatColor.YELLOW + "がありそうだ");
+            meta.setLore(lores);
         }
     }
 }
