@@ -32,13 +32,6 @@ public final class Horihoricore extends JavaPlugin implements Listener {
         map.put(e.getPlayer(), 0);
     }
 
-    @EventHandler
-    public void onCmd(PlayerCommandPreprocessEvent e) {
-        int value = map.get(e.getPlayer());
-        map.replace(e.getPlayer(), value + 1);
-    }
-
-
     @Override
     public void onDisable() {
         getLogger().info("HoriHoriCoreぱーぼーを終了します...");
