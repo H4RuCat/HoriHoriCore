@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,7 +12,7 @@ import java.util.HashMap;
 
 public final class Horihoricore extends JavaPlugin implements Listener {
 
-    public static String Prefix = ChatColor.GRAY + "[" + ChatColor.WHITE + "HoriCore" + ChatColor.GRAY + "]" + ChatColor.WHITE ;
+    public static String Prefix = ChatColor.GRAY + "[" + ChatColor.WHITE + "HoriCore" + ChatColor.GRAY + "] " + ChatColor.WHITE ;
     private Listeners listeners;
 
     public HashMap<Player, Integer> map = new HashMap<>();
@@ -26,11 +25,9 @@ public final class Horihoricore extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
 
     }
-
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
-        map.put(e.getPlayer(), 0);
-    }
+    public void onJoin(PlayerJoinEvent e) {map.put(e.getPlayer(), 0);}
+
 
     @Override
     public void onDisable() {
