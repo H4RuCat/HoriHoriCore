@@ -1,6 +1,5 @@
 package horihoricore.horihoricore;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,11 +9,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static horihoricore.horihoricore.Horihoricore.Prefix;
 
@@ -33,17 +29,25 @@ public class Listeners implements Listener {
                 map.replace(e.getPlayer(), value + 1);
                 e.getPlayer().sendActionBar(ChatColor.YELLOW + "現在の採掘量" + map.get(e.getPlayer()));
             }
-        if (map.containsKey(e.getPlayer()) == map.containsValue(25)) // 採掘量が25になったらそのプレイヤーに25が超えたことを知らせる + ピッケルの進化 //
+        // 採掘量が25になったらそのプレイヤーに25が超えたことを知らせる + ピッケルの進化 //
+        if (map.containsKey(e.getPlayer()) == map.containsValue(25))
         {
             e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "25" + ChatColor.YELLOW + "を超えました！");
-            Inventory inv = e.getPlayer().getInventory(); // ここからアイテム //
+            // ここからアイテム //
+            Inventory inv = e.getPlayer().getInventory();
             inv.addItem(new ItemStack(Material.STONE_PICKAXE,1));
+            // ここでアイテム終わり //
+            // 採掘量25のやつ終わり //
         }
-        if (map.containsKey(e.getPlayer()) == map.containsValue(100)) // 採掘量が100になったらそのプレイヤーに100が超えたことを知らせる + ピッケルの進化 + 新要素←予定 //
+        // 採掘量が100になったらそのプレイヤーに100が超えたことを知らせる + ピッケルの進化 + 新要素←予定 //
+        if (map.containsKey(e.getPlayer()) == map.containsValue(100))
         {
             e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えました！");
-            Inventory inv = e.getPlayer().getInventory(); // ここからアイテム //
+            // ここからアイテム //
+            Inventory inv = e.getPlayer().getInventory();
             inv.addItem(new ItemStack(Material.IRON_PICKAXE,1));
+            // ここでアイテム終わり //
+            // 採掘量100のやつ終わり //
         }
     }
     @EventHandler // 初回ログイン特典の配布 //
