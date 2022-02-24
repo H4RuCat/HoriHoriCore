@@ -6,11 +6,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerBedLeaveEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static horihoricore.horihoricore.Horihoricore.Prefix;
 
@@ -56,13 +61,13 @@ public class Listeners implements Listener {
         String pName = e.getPlayer().getName();
 
         if (e.getPlayer().getWorld().getName().equals("HoriHori")) {
-            if (e.getPlayer().hasPlayedBefore()); // ここで初参加か検知する //
-                else e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW.BOLD + "初回ログイン特典を配布しました！");
+            if (e.getPlayer().hasPlayedBefore()) ; // ここで初参加か検知する //
+            else e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW.BOLD + "初回ログイン特典を配布しました！");
             Inventory inv = e.getPlayer().getInventory(); // ここからアイテム //
-            if (inv.contains(Material.WOODEN_PICKAXE));
-            else inv.addItem(new ItemStack(Material.WOODEN_PICKAXE,1));
+            if (inv.contains(Material.WOODEN_PICKAXE)) ;
+            else inv.addItem(new ItemStack(Material.WOODEN_PICKAXE, 1));
             e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "こんにちは！" + ChatColor.AQUA + pName + ChatColor.YELLOW + "さん！貴方の現在の採掘量は" + ChatColor.RED + map.get(e.getPlayer()) + ChatColor.YELLOW + "です！");
         }
     }
-    // Event追加するならここから～ //
+    // Event追加するならここから //
 }
