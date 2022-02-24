@@ -37,26 +37,12 @@ public class Listeners implements Listener {
             e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "25" + ChatColor.YELLOW + "を超えました！");
             Inventory inv = e.getPlayer().getInventory(); // ここからアイテム //
             inv.addItem(new ItemStack(Material.STONE_PICKAXE,1));
-            ItemStack item = new ItemStack(Material.STONE_PICKAXE,1);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ChatColor.YELLOW + "初心のピッケル +");
-            List<String> lores = new ArrayList<String>();
-            lores.add(ChatColor.YELLOW + "採掘報酬で貰うことが出来るピッケル");
-            lores.add(ChatColor.YELLOW + "性能は...まぁ、普通。まだまだ" + ChatColor.RED + "伸びしろ" + ChatColor.YELLOW + "がありそうだ");
-            meta.setLore(lores); // ここでアイテムのやつ終わり //
         }
         if (map.containsKey(e.getPlayer()) == map.containsValue(100)) // 採掘量が100になったらそのプレイヤーに100が超えたことを知らせる + ピッケルの進化 + 新要素←予定 //
         {
             e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えました！");
             Inventory inv = e.getPlayer().getInventory(); // ここからアイテム //
             inv.addItem(new ItemStack(Material.IRON_PICKAXE,1));
-            ItemStack item = new ItemStack(Material.IRON_PICKAXE,1);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ChatColor.YELLOW + "初心のピッケル +");
-            List<String> lores = new ArrayList<String>();
-            lores.add(ChatColor.YELLOW + "採掘報酬で貰うことが出来るピッケル");
-            lores.add(ChatColor.YELLOW + "性能は...ソコソコ良い。しかしまだ" + ChatColor.RED + "伸びしろ" + ChatColor.YELLOW + "はありそうだ");
-            meta.setLore(lores); // ここでアイテムのやつ終わり //
         }
     }
     @EventHandler // 初回ログイン特典の配布 //
@@ -66,13 +52,6 @@ public class Listeners implements Listener {
                 e.getPlayer().sendMessage(ChatColor.MAGIC.AQUA + "ll" + ChatColor.YELLOW.BOLD + "初回ログイン特典を配布しました！" + ChatColor.MAGIC.AQUA + "ll");
             Inventory inv = e.getPlayer().getInventory(); // ここからアイテム //
             inv.addItem(new ItemStack(Material.WOODEN_PICKAXE,1));
-            ItemStack item = new ItemStack(Material.WOODEN_PICKAXE,1);
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ChatColor.YELLOW + "初心のピッケル");
-            List<String> lores = new ArrayList<String>();
-            lores.add(ChatColor.YELLOW + "一番最初に貰うことが出来るピッケル");
-            lores.add(ChatColor.YELLOW + "性能はイマイチだが..." + ChatColor.RED + "伸びしろ" + ChatColor.YELLOW + "がありそうだ");
-            meta.setLore(lores); // ここでアイテムのやつ終わり //
         }
     }
     // Event追加するならここから～ //
