@@ -1,5 +1,6 @@
 package horihoricore.horihoricore;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -47,11 +48,17 @@ public class Listeners implements Listener {
     }
     @EventHandler // 初回ログイン特典の配布 //
     public void onJoin(PlayerJoinEvent e) {
+
+        String pName = e.getPlayer().getName();
+
         if (e.getPlayer().getWorld().getName().equals("HoriHori")) {
-            if (e.getPlayer().hasPlayedBefore()) // ここで初参加か検知する //
-                e.getPlayer().sendMessage(ChatColor.MAGIC.AQUA + "ll" + ChatColor.YELLOW.BOLD + "初回ログイン特典を配布しました！" + ChatColor.MAGIC.AQUA + "ll");
+            if (e.getPlayer().hasPlayedBefore()); // ここで初参加か検知する //
+                else
+                e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW.BOLD + "初回ログイン特典を配布しました！");
             Inventory inv = e.getPlayer().getInventory(); // ここからアイテム //
-            inv.addItem(new ItemStack(Material.WOODEN_PICKAXE,1));
+            if (inv.contains(Material.WOODEN_PICKAXE));
+            else inv.addItem(new ItemStack(Material.WOODEN_PICKAXE,1));
+            e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "こんにちは！" + ChatColor.AQUA + pName + ChatColor.YELLOW + "さん！貴方の現在の採掘量は" + ChatColor.RED + map.get(e.getPlayer()) + ChatColor.YELLOW + "です！");
         }
     }
     // Event追加するならここから～ //
