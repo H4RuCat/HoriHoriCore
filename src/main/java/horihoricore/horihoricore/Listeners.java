@@ -27,7 +27,7 @@ public class Listeners implements Listener {
             if (e.getPlayer().getWorld().getName().equals("HoriHori")) {
                 int value = map.get(e.getPlayer());
                 map.replace(e.getPlayer(), value + 1);
-                e.getPlayer().sendActionBar(ChatColor.YELLOW + "現在の採掘量" + map.get(e.getPlayer()));
+                e.getPlayer().sendActionBar(ChatColor.YELLOW + "現在の採掘量" + ChatColor.AQUA + ":" + ChatColor.YELLOW + map.get(e.getPlayer()));
             }
         // 採掘量が25になったらそのプレイヤーに25が超えたことを知らせる + ピッケルの進化 //
         if (map.containsKey(e.getPlayer()) == map.containsValue(25))
@@ -57,8 +57,7 @@ public class Listeners implements Listener {
 
         if (e.getPlayer().getWorld().getName().equals("HoriHori")) {
             if (e.getPlayer().hasPlayedBefore()); // ここで初参加か検知する //
-                else
-                e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW.BOLD + "初回ログイン特典を配布しました！");
+                else e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW.BOLD + "初回ログイン特典を配布しました！");
             Inventory inv = e.getPlayer().getInventory(); // ここからアイテム //
             if (inv.contains(Material.WOODEN_PICKAXE));
             else inv.addItem(new ItemStack(Material.WOODEN_PICKAXE,1));
