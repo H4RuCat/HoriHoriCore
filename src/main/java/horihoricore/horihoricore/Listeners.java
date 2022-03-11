@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -55,7 +56,7 @@ public class Listeners implements Listener {
     private static HashMap<Player, Integer> map = new HashMap<>();
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
+    public void onJoin(PlayerChangedWorldEvent e) {
 
         //String pName = e.getPlayer().getName(); 一度しか使わないならいらん気がする
 
@@ -72,4 +73,4 @@ public class Listeners implements Listener {
     }
     // Event追加するならここから //
     }
-    
+
