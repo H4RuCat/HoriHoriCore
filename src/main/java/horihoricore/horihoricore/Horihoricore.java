@@ -9,13 +9,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public final class Horihoricore extends JavaPlugin implements Listener {
 
     public static String Prefix = ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "BreakCore" + ChatColor.DARK_GRAY + "] " + ChatColor.WHITE ;
     private Listeners listeners;
-
-    public HashMap<Player, Integer> map = new HashMap<>();
+    public HashMap<UUID, Integer> map = new HashMap<>();
 
     @Override
     public void onEnable() {

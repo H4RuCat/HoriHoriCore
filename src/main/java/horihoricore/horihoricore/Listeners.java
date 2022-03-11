@@ -18,7 +18,7 @@ import java.util.UUID;
 import static horihoricore.horihoricore.Horihoricore.Prefix;
 
 public class Listeners implements Listener {
-    public Listeners(HashMap<Player, Integer> map) {
+    public Listeners(HashMap<UUID, Integer> map) {
         this.map = map;
     }
 
@@ -26,12 +26,12 @@ public class Listeners implements Listener {
     public void onBreakCobbleStone(BlockBreakEvent e) {
         if (e.getBlock().getType() == Material.COBBLESTONE)
             if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) {
-                int value = map.get(e.getPlayer());
-                map.replace(e.getPlayer(), value + 1);
-                e.getPlayer().sendActionBar(ChatColor.YELLOW + "現在の採掘量" + ChatColor.AQUA + " : " + ChatColor.YELLOW + map.get(e.getPlayer()));
+                int value = map.get(e.getPlayer().getUniqueId());
+                map.replace(e.getPlayer().getUniqueId(), value + 1);
+                e.getPlayer().sendActionBar(ChatColor.YELLOW + "現在の採掘量" + ChatColor.AQUA + " : " + ChatColor.YELLOW + map.get(e.getPlayer().getUniqueId()));
             }
         // 採掘量が25になったらそのプレイヤーに25が超えたことを知らせる + ピッケルの進化 //
-        if (map.containsKey(e.getPlayer()) == map.containsValue(25))
+        if (map.containsKey(e.getPlayer().getUniqueId()) == map.containsValue(25))
             if (e.getBlock().getType() == Material.COBBLESTONE)
         {
             e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "25" + ChatColor.YELLOW + "を超えました！");
@@ -42,7 +42,7 @@ public class Listeners implements Listener {
             // 採掘量25のやつ終わり //
         }
         // 採掘量が100になったらそのプレイヤーに100が超えたことを知らせる + ピッケルの進化 + 新要素←予定 //
-        if (map.containsKey(e.getPlayer()) == map.containsValue(100))
+        if (map.containsKey(e.getPlayer().getUniqueId()) == map.containsValue(100))
             if (e.getBlock().getType() == Material.COBBLESTONE)
         {
             e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えました！");
