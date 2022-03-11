@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import static horihoricore.horihoricore.Horihoricore.Prefix;
 
@@ -53,7 +54,7 @@ public class Listeners implements Listener {
         }
     }
     // ログインのやつ //
-    private static HashMap<Player, Integer> map = new HashMap<>();
+    private static HashMap<UUID, Integer> map = new HashMap<>();
 
     @EventHandler
     public void onJoin(PlayerChangedWorldEvent e) {
@@ -67,7 +68,7 @@ public class Listeners implements Listener {
         Inventory inv = e.getPlayer().getInventory(); // インベントリ取得
         if (!inv.contains(Material.WOODEN_PICKAXE)) inv.addItem(new ItemStack(Material.WOODEN_PICKAXE, 1)); //木のピッケルがない場合giveする
 
-        if (!map.containsKey(e.getPlayer())) map.put(e.getPlayer(), 0);
+        if (!map.containsKey(e.getPlayer().getUniqueId())) map.put(e.getPlayer().getUniqueId(), 0);
 
         e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "こんにちは！" + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.YELLOW + "さん！貴方の現在の採掘量は" + ChatColor.RED + map.get(e.getPlayer()) + ChatColor.YELLOW + "です！");
     }
