@@ -1,16 +1,23 @@
 package horihoricore.horihoricore;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import com.fastasyncworldedit.core.FaweAPI;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.WorldEdit;
+import com.sk89q.worldedit.extent.Extent;
+import com.sk89q.worldedit.function.mask.BlockMask;
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.world.block.BaseBlock;
+import com.sk89q.worldedit.world.block.BlockTypes;
+import org.bukkit.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -26,15 +33,16 @@ public class Listeners implements Listener {
     public void onBreakCobbleStone(BlockBreakEvent e) {
         if (e.getBlock().getType() == Material.COBBLESTONE)
             if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) {
+                map.containsKey(e.getPlayer().getUniqueId());
                 int value = map.get(e.getPlayer().getUniqueId());
                 map.replace(e.getPlayer().getUniqueId(), value + 1);
                 e.getPlayer().sendActionBar(ChatColor.YELLOW + "現在の採掘量" + ChatColor.AQUA + " : " + ChatColor.YELLOW + map.get(e.getPlayer().getUniqueId()));
             }
         // 採掘量が25になったらそのプレイヤーに25が超えたことを知らせる + ピッケルの進化 //
-        if (map.containsKey(e.getPlayer().getUniqueId()) == map.containsValue(25))
+        if (map.get(e.getPlayer().getUniqueId()) == 25)
             if (e.getBlock().getType() == Material.COBBLESTONE)
         {
-            e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "25" + ChatColor.YELLOW + "を超えました！");
+            e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "25" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "石のピッケル" + ChatColor.YELLOW + "を配布しました。");
             // ここからアイテム //
             Inventory inv = e.getPlayer().getInventory();
             inv.addItem(new ItemStack(Material.STONE_PICKAXE,1));
@@ -42,16 +50,36 @@ public class Listeners implements Listener {
             // 採掘量25のやつ終わり //
         }
         // 採掘量が100になったらそのプレイヤーに100が超えたことを知らせる + ピッケルの進化 + 新要素←予定 //
-        if (map.containsKey(e.getPlayer().getUniqueId()) == map.containsValue(100))
+        if (map.get(e.getPlayer().getUniqueId()) == 100)
             if (e.getBlock().getType() == Material.COBBLESTONE)
         {
-            e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えました！");
+            e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "鉄のピッケル" + ChatColor.YELLOW + "を配布しました。");
             // ここからアイテム //
             Inventory inv = e.getPlayer().getInventory();
             inv.addItem(new ItemStack(Material.IRON_PICKAXE,1));
             // ここでアイテム終わり //
             // 採掘量100のやつ終わり //
         }
+        if (map.get(e.getPlayer().getUniqueId()) == 250)
+            if (e.getBlock().getType() == Material.COBBLESTONE)
+            {
+                e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "250" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ダイヤのピッケル" + ChatColor.YELLOW + "を配布しました。");
+                // ここからアイテム //
+                Inventory inv = e.getPlayer().getInventory();
+                inv.addItem(new ItemStack(Material.IRON_PICKAXE,1));
+                // ここでアイテム終わり //
+                // 採掘量100のやつ終わり //
+            }
+        if (map.get(e.getPlayer().getUniqueId()) == 500)
+            if (e.getBlock().getType() == Material.COBBLESTONE)
+            {
+                e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "500" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ネザライトのピッケル" + ChatColor.YELLOW + "を配布しました。");
+                // ここからアイテム //
+                Inventory inv = e.getPlayer().getInventory();
+                inv.addItem(new ItemStack(Material.NETHERITE_PICKAXE,1));
+                // ここでアイテム終わり //
+                // 採掘量100のやつ終わり //
+            }
     }
     // ログインのやつ //
     private static HashMap<UUID, Integer> map = new HashMap<>();
@@ -59,19 +87,38 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoin(PlayerChangedWorldEvent e) {
 
-        //String pName = e.getPlayer().getName(); 一度しか使わないならいらん気がする
-
         if (!e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) return;
 
-        if (!e.getPlayer().hasPlayedBefore()) e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW.BOLD + "初回ログイン特典を配布しました！");
+        if (!e.getPlayer().hasPlayedBefore()) e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + ChatColor.BOLD + "初回ログイン特典を配布しました！");
 
         Inventory inv = e.getPlayer().getInventory(); // インベントリ取得
         if (!inv.contains(Material.WOODEN_PICKAXE)) inv.addItem(new ItemStack(Material.WOODEN_PICKAXE, 1)); //木のピッケルがない場合giveする
 
         if (!map.containsKey(e.getPlayer().getUniqueId())) map.put(e.getPlayer().getUniqueId(), 0);
 
-        e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "こんにちは！" + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.YELLOW + "さん！貴方の現在の採掘量は" + ChatColor.RED + map.get(e.getPlayer()) + ChatColor.YELLOW + "です！");
+        e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "こんにちは！" + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.YELLOW + "さん！貴方の現在の採掘量は" + ChatColor.RED + map.get(e.getPlayer().getUniqueId()) + ChatColor.YELLOW + "です！");
     }
-    // Event追加するならここから //
+    public boolean isAllAir(Location loc1, Location loc2) {
+
+        int minX = Integer.min(loc1.getBlockX(), loc2.getBlockX());
+        int minY = Integer.min(loc1.getBlockY(), loc2.getBlockY());
+        int minZ = Integer.min(loc1.getBlockZ(), loc2.getBlockZ());
+
+        int maxX = Integer.max(loc1.getBlockX(), loc2.getBlockX());
+        int maxY = Integer.max(loc1.getBlockY(), loc2.getBlockY());
+        int maxZ = Integer.max(loc1.getBlockZ(), loc2.getBlockZ());
+
+        for (; minX <= maxX; minX++) {
+            for (; minY <= maxY; minY++) {
+                for (; minZ <= maxZ; minZ++) {
+                    if (loc1.getWorld().getBlockAt(minX, minY, minZ).getType() != Material.AIR) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
+}
+
 
