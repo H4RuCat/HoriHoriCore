@@ -1,8 +1,8 @@
 package horihoricore.horihoricore;
 
+import com.google.common.util.concurrent.AbstractScheduledService;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -24,11 +24,9 @@ public final class Horihoricore extends JavaPlugin implements Listener {
         // イベント登録 //
         Bukkit.getPluginManager().registerEvents(this.listeners, this);
         Bukkit.getPluginManager().registerEvents(this, this);
-
     }
 
     @Override
-    public void onDisable() {
-        getLogger().info("HoriHoriCoreぱーぼーを終了します...");
-    }
+    public void onDisable() {getLogger().info("HoriHoriCoreぱーぼーを終了します...");}
+
 }
