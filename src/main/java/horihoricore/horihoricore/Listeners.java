@@ -26,22 +26,22 @@ public class Listeners implements Listener {
         if (e.getBlock().getType() == Material.COBBLESTONE)
             if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) {
                 map.containsKey(e.getPlayer().getUniqueId());
-                int value = map.get(e.getPlayer().getUniqueId());
-                map.replace(e.getPlayer().getUniqueId(), value + 1);
-                e.getPlayer().sendActionBar(ChatColor.YELLOW + "現在の採掘量" + ChatColor.AQUA + " : " + ChatColor.YELLOW + map.get(e.getPlayer().getUniqueId()));
+                int value = map.getOrDefault(e.getPlayer().getUniqueId(), 0);
+                map.put(e.getPlayer().getUniqueId(), value + 1);
+                e.getPlayer().sendActionBar(ChatColor.YELLOW + "現在の採掘量" + ChatColor.AQUA + " : " + ChatColor.YELLOW + value);
             }
         // 採掘量が25になったらそのプレイヤーに25が超えたことを知らせる + ピッケルの進化 //
-        if (map.get(e.getPlayer().getUniqueId()) == 25)
+        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 26)
             if (e.getBlock().getType() == Material.COBBLESTONE) {
                 e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "25" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "石のピッケル" + ChatColor.YELLOW + "を配布しました。");
-                // ここからアイテム //
+                // ここからアイテム //D
                 Inventory inv = e.getPlayer().getInventory();
                 inv.addItem(new ItemStack(Material.STONE_PICKAXE, 1));
                 // ここでアイテム終わり //
                 // 採掘量25のやつ終わり //
             }
         // 採掘量が100になったらそのプレイヤーに100が超えたことを知らせる + ピッケルの進化 + 新要素←予定 //
-        if (map.get(e.getPlayer().getUniqueId()) == 100)
+        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 101)
             if (e.getBlock().getType() == Material.COBBLESTONE) {
                 e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "鉄のピッケル" + ChatColor.YELLOW + "を配布しました。");
                 // ここからアイテム //
@@ -50,23 +50,23 @@ public class Listeners implements Listener {
                 // ここでアイテム終わり //
                 // 採掘量100のやつ終わり //
             }
-        if (map.get(e.getPlayer().getUniqueId()) == 250)
+        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 251)
             if (e.getBlock().getType() == Material.COBBLESTONE) {
                 e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "250" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ダイヤのピッケル" + ChatColor.YELLOW + "を配布しました。");
                 // ここからアイテム //
                 Inventory inv = e.getPlayer().getInventory();
                 inv.addItem(new ItemStack(Material.IRON_PICKAXE, 1));
                 // ここでアイテム終わり //
-                // 採掘量100のやつ終わり //
+                // 採掘量250のやつ終わり //
             }
-        if (map.get(e.getPlayer().getUniqueId()) == 500)
+        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 501)
             if (e.getBlock().getType() == Material.COBBLESTONE) {
                 e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "500" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ネザライトのピッケル" + ChatColor.YELLOW + "を配布しました。");
                 // ここからアイテム //
                 Inventory inv = e.getPlayer().getInventory();
                 inv.addItem(new ItemStack(Material.NETHERITE_PICKAXE, 1));
                 // ここでアイテム終わり //
-                // 採掘量100のやつ終わり //
+                // 採掘量500のやつ終わり //
             }
     }
 
@@ -98,14 +98,14 @@ public class Listeners implements Listener {
         Location loc1 = new Location(worldLoc.getWorld(), -65, 19, 80);
         Location loc2 = new Location(worldLoc.getWorld(), -79, 12, 94);
 
-        boolean allAir = isAllAir(loc1, loc2);
+        boolean allAir = isAllAir(loc1, loc2, e.getBlock());
 
         if (allAir) {
             setCobblestone(loc1, loc2);
         }
     }
 
-    public boolean isAllAir(Location loc1, Location loc2) {
+    public boolean isAllAir(Location loc1, Location loc2, Block exempt) {
 
         int minX = Integer.min(loc1.getBlockX(), loc2.getBlockX());
         int minY = Integer.min(loc1.getBlockY(), loc2.getBlockY());
@@ -115,10 +115,14 @@ public class Listeners implements Listener {
         int maxY = Integer.max(loc1.getBlockY(), loc2.getBlockY());
         int maxZ = Integer.max(loc1.getBlockZ(), loc2.getBlockZ());
 
-        for (; minX <= maxX; minX++) {
-            for (; minY <= maxY; minY++) {
-                for (; minZ <= maxZ; minZ++) {
-                    if (loc1.getWorld().getBlockAt(minX, minY, minZ).getType() != Material.AIR) {
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                for (int z = minZ; z <= maxZ; z++) {
+                    Block block = loc1.getWorld().getBlockAt(x, y, z);
+                    if (block.getLocation().equals(exempt.getLocation())) {
+                        continue;
+                    }
+                    if (block.getType() != Material.AIR) {
                         return false;
                     }
                 }
@@ -137,10 +141,10 @@ public class Listeners implements Listener {
         int maxY = Integer.max(loc1.getBlockY(), loc2.getBlockY());
         int maxZ = Integer.max(loc1.getBlockZ(), loc2.getBlockZ());
 
-        for (; minX <= maxX; minX++) {
-            for (; minY <= maxY; minY++) {
-                for (; minZ <= maxZ; minZ++) {
-                    loc1.getWorld().getBlockAt(minX, minY, minZ).setType(Material.COBBLESTONE);
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                for (int z = minZ; z <= maxZ; z++) {
+                    loc1.getWorld().getBlockAt(x, y, z).setType(Material.COBBLESTONE);
                 }
             }
         }
