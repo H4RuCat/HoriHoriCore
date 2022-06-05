@@ -91,7 +91,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
 
-        if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori"));
+        if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) {
 
         Location worldLoc = e.getBlock().getLocation();
 
@@ -102,6 +102,7 @@ public class Listeners implements Listener {
 
         if (allAir) {
             setCobblestone(loc1, loc2);
+        }
         }
     }
 
