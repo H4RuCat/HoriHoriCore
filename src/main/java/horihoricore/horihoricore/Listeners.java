@@ -19,10 +19,10 @@ public class Listeners implements Listener {
         this.map = map;
     }
 
-    @EventHandler // 丸石を掘ったら～...っていうやつ //
+    @EventHandler
     public void onBreakCobbleStone(BlockBreakEvent e) {
-        if (e.getBlock().getType() == Material.COBBLESTONE)
-            if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) {
+        if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori"))
+            if (e.getBlock().getType() == Material.COBBLESTONE) {
                 map.containsKey(e.getPlayer().getUniqueId());
                 int value = map.getOrDefault(e.getPlayer().getUniqueId(), 0);
                 map.put(e.getPlayer().getUniqueId(), value + 1);
