@@ -91,6 +91,8 @@ public class Listeners implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
 
+        if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori"));
+
         Location worldLoc = e.getBlock().getLocation();
 
         Location loc1 = new Location(worldLoc.getWorld(), -65, 19, 80);
