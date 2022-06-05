@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>HoriHoriCore</groupId>
-    <artifactId>HoriHori-paaboo</artifactId>
-    <version>1.0.0</version>
+    <artifactId>HoriHori</artifactId>
+    <version>paaboo</version>
     <packaging>jar</packaging>
 
     <name>Horihoricore</name>
