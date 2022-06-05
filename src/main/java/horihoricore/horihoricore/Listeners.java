@@ -21,7 +21,7 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onBreakCobbleStone(BlockBreakEvent e) {
-        if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori"))
+        if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) return;
             if (e.getBlock().getType() == Material.COBBLESTONE) {
                 map.containsKey(e.getPlayer().getUniqueId());
                 int value = map.getOrDefault(e.getPlayer().getUniqueId(), 0);
