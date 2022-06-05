@@ -2,6 +2,7 @@ package horihoricore.horihoricore;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import static horihoricore.horihoricore.Horihoricore.Prefix;
+import static horihoricore.horihoricore.Horihoricore.breakM1;
 
 public class Listeners implements Listener {
     public Listeners(HashMap<UUID, Integer> map) {
@@ -22,53 +24,40 @@ public class Listeners implements Listener {
     @EventHandler
     public void onBreakCobbleStone(BlockBreakEvent e) {
         if (!e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) return;
-            if (e.getBlock().getType() == Material.COBBLESTONE) {
+            if (e.getBlock().getType() == Material.COBBLESTONE) return;
+
+                Inventory inv = e.getPlayer().getInventory();
+
                 map.containsKey(e.getPlayer().getUniqueId());
                 int value = map.getOrDefault(e.getPlayer().getUniqueId(), 0);
                 map.put(e.getPlayer().getUniqueId(), value + 1);
                 e.getPlayer().sendActionBar(ChatColor.YELLOW + "現在の採掘量" + ChatColor.AQUA + " : " + ChatColor.YELLOW + value);
-            }
-        // 採掘量が25になったらそのプレイヤーに25が超えたことを知らせる + ピッケルの進化 //
-        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 26)
-            if (e.getBlock().getType() == Material.COBBLESTONE) {
-                e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "25" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "石のピッケル" + ChatColor.YELLOW + "を配布しました。");
-                // ここからアイテム //D
-                Inventory inv = e.getPlayer().getInventory();
+
+        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 26) {
+                e.getPlayer().sendMessage(Prefix + breakM1 + "25" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "石のピッケル" + ChatColor.YELLOW + "を配布しました。");
+
                 inv.addItem(new ItemStack(Material.STONE_PICKAXE, 1));
-                // ここでアイテム終わり //
-                // 採掘量25のやつ終わり //
             }
-        // 採掘量が100になったらそのプレイヤーに100が超えたことを知らせる + ピッケルの進化 + 新要素←予定 //
-        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 101)
-            if (e.getBlock().getType() == Material.COBBLESTONE) {
-                e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "鉄のピッケル" + ChatColor.YELLOW + "を配布しました。");
-                // ここからアイテム //
-                Inventory inv = e.getPlayer().getInventory();
+
+        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 101) {
+                e.getPlayer().sendMessage(Prefix + breakM1 + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "鉄のピッケル" + ChatColor.YELLOW + "を配布しました。");
+
                 inv.addItem(new ItemStack(Material.IRON_PICKAXE, 1));
-                // ここでアイテム終わり //
-                // 採掘量100のやつ終わり //
             }
-        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 251)
-            if (e.getBlock().getType() == Material.COBBLESTONE) {
-                e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "250" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ダイヤのピッケル" + ChatColor.YELLOW + "を配布しました。");
-                // ここからアイテム //
-                Inventory inv = e.getPlayer().getInventory();
-                inv.addItem(new ItemStack(Material.IRON_PICKAXE, 1));
-                // ここでアイテム終わり //
-                // 採掘量250のやつ終わり //
+
+        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 251) {
+                e.getPlayer().sendMessage(Prefix + breakM1 + ChatColor.RED + "250" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ダイヤのピッケル" + ChatColor.YELLOW + "を配布しました。");
+
+                inv.addItem(new ItemStack(Material.DIAMOND_PICKAXE, 1));
             }
-        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 501)
-            if (e.getBlock().getType() == Material.COBBLESTONE) {
-                e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "採掘量が" + ChatColor.RED + "500" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ネザライトのピッケル" + ChatColor.YELLOW + "を配布しました。");
-                // ここからアイテム //
-                Inventory inv = e.getPlayer().getInventory();
+
+        if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 501) {
+                e.getPlayer().sendMessage(Prefix + breakM1 + ChatColor.RED + "500" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ネザライトのピッケル" + ChatColor.YELLOW + "を配布しました。");
+
                 inv.addItem(new ItemStack(Material.NETHERITE_PICKAXE, 1));
-                // ここでアイテム終わり //
-                // 採掘量500のやつ終わり //
             }
     }
 
-    // ログインのやつ //
     private static HashMap<UUID, Integer> map = new HashMap<>();
 
     @EventHandler
@@ -76,32 +65,43 @@ public class Listeners implements Listener {
 
         if (!e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) return;
 
-        if (!e.getPlayer().hasPlayedBefore())
-            e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + ChatColor.BOLD + "初回ログイン特典を配布しました！");
+        Inventory inv = e.getPlayer().getInventory();
 
-        Inventory inv = e.getPlayer().getInventory(); // インベントリ取得
-        if (!inv.contains(Material.WOODEN_PICKAXE))
-            inv.addItem(new ItemStack(Material.WOODEN_PICKAXE, 1)); //木のピッケルがない場合giveする
+            if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 0) return;
+                else if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == null) {
 
-        if (!map.containsKey(e.getPlayer().getUniqueId())) map.put(e.getPlayer().getUniqueId(), 0);
+                    inv.clear();
+            }
+            if (!e.getPlayer().hasPlayedBefore())
+                e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + ChatColor.BOLD + "初回ログイン特典を配布しました！");
 
-        e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "こんにちは！" + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.YELLOW + "さん！貴方の現在の採掘量は" + ChatColor.RED + map.get(e.getPlayer().getUniqueId()) + ChatColor.YELLOW + "です！");
-    }
+            if (!inv.contains(Material.WOODEN_PICKAXE))
+                inv.addItem(new ItemStack(Material.WOODEN_PICKAXE, 1));
+
+            if (!map.containsKey(e.getPlayer().getUniqueId())) map.put(e.getPlayer().getUniqueId(), 0);
+
+            e.getPlayer().sendMessage(Prefix + ChatColor.YELLOW + "こんにちは！" + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.YELLOW + "さん！貴方の現在の採掘量は" + ChatColor.RED + map.get(e.getPlayer().getUniqueId()) + ChatColor.YELLOW + "です！");
+        }
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
 
         if (e.getPlayer().getWorld().getName().equalsIgnoreCase("HoriHori")) {
 
-        Location worldLoc = e.getBlock().getLocation();
+        Player p = e.getPlayer();
 
+        Location worldLoc = e.getBlock().getLocation();
         Location loc1 = new Location(worldLoc.getWorld(), -65, 19, 80);
         Location loc2 = new Location(worldLoc.getWorld(), -79, 12, 94);
+        Location loc = new Location(worldLoc.getWorld(), -62, 20, 87);
 
         boolean allAir = isAllAir(loc1, loc2, e.getBlock());
 
         if (allAir) {
             setCobblestone(loc1, loc2);
+
+            p.teleport(loc);
+            p.sendRawMessage("全ての丸石が採掘された為、丸石を復活させました。");
         }
         }
     }
