@@ -11,6 +11,8 @@ import java.util.UUID;
 public final class Horihoricore extends JavaPlugin implements Listener {
 
     public static String Prefix = ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "BreakCore" + ChatColor.DARK_GRAY + "] " + ChatColor.WHITE ;
+    public static String breakM1 = ChatColor.YELLOW + "採掘量が" + ChatColor.RED ;
+
     private Listeners listeners;
     public HashMap<UUID, Integer> map = new HashMap<>();
 
