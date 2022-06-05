@@ -1,9 +1,7 @@
 package horihoricore.horihoricore;
 
-import com.fastasyncworldedit.core.util.collection.BlockSet;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
