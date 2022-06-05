@@ -40,19 +40,19 @@ public class Listeners implements Listener {
             }
 
         if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 101) {
-                e.getPlayer().sendMessage(Prefix + breakM1 + ChatColor.RED + "100" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "鉄のピッケル" + ChatColor.YELLOW + "を配布しました。");
+                e.getPlayer().sendMessage(Prefix + breakM1 +  "100" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "鉄のピッケル" + ChatColor.YELLOW + "を配布しました。");
 
                 inv.addItem(new ItemStack(Material.IRON_PICKAXE, 1));
             }
 
         if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 251) {
-                e.getPlayer().sendMessage(Prefix + breakM1 + ChatColor.RED + "250" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ダイヤのピッケル" + ChatColor.YELLOW + "を配布しました。");
+                e.getPlayer().sendMessage(Prefix + breakM1 +  "250" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ダイヤのピッケル" + ChatColor.YELLOW + "を配布しました。");
 
                 inv.addItem(new ItemStack(Material.DIAMOND_PICKAXE, 1));
             }
 
         if (map.getOrDefault(e.getPlayer().getUniqueId(), 0) == 501) {
-                e.getPlayer().sendMessage(Prefix + breakM1 + ChatColor.RED + "500" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ネザライトのピッケル" + ChatColor.YELLOW + "を配布しました。");
+                e.getPlayer().sendMessage(Prefix + breakM1 +  "500" + ChatColor.YELLOW + "を超えた為" + ChatColor.AQUA + "ネザライトのピッケル" + ChatColor.YELLOW + "を配布しました。");
 
                 inv.addItem(new ItemStack(Material.NETHERITE_PICKAXE, 1));
             }
